@@ -4,9 +4,13 @@ name: Build IPA
 # (same flow as ipabuild.sh, which needs a Mac - this mirrors it on CI so you
 # can get an installable .ipa straight from GitHub without Xcode locally).
 
+permissions:
+  contents: write
+
 on:
   push:
     branches: [main]
+    tags: ['v*']
   workflow_dispatch:
 
 jobs:
