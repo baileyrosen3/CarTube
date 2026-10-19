@@ -39,7 +39,7 @@ struct Debug: View {
     private func carScreenLabel(_ screen: UIScreen) -> String {
         var isCar = false
         if screen.responds(to: NSSelectorFromString("_isCarScreen")) {
-            isCar = screen._isCarScreen
+            isCar = screen._isCarScreen()
         }
         let suffix = isCar ? " — car screen" : ""
         return "\(Int(screen.bounds.width)) × \(Int(screen.bounds.height)) pts @\(Int(screen.scale))x\(suffix)"

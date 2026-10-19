@@ -1,22 +1,10 @@
 {
   "images" : [
     {
-      "filename" : "CarTube120.png",
-      "idiom" : "iphone",
-      "scale" : "1x",
-      "size" : "60x60"
-    },
-    {
-      "filename" : "CarTube120.png",
-      "idiom" : "iphone",
-      "scale" : "2x",
-      "size" : "60x60"
-    },
-    {
-      "filename" : "CarTube180.png",
-      "idiom" : "iphone",
-      "scale" : "3x",
-      "size" : "60x60"
+      "filename" : "CarTube1024.png",
+      "idiom" : "universal",
+      "platform" : "ios",
+      "size" : "1024x1024"
     }
   ],
   "info" : {
