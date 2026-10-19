@@ -1,3 +1,12 @@
+> ### Fork
+> Upstream [Avangelista/CarTube](https://github.com/Avangelista/CarTube) is archived (GPL-3.0). This fork carries:
+> - **Force Highest Quality** — Settings toggle that keeps YouTube's web player pinned to its best available quality (`Scripts/MaxQuality.js`). Turn it off if playback stutters.
+> - **Car-screen diagnostics** — Debug tab lists every UIScreen, flagging the car display, so you can tune zoom/quality against the dimensions your head unit actually reports.
+> - **One-click IPA builds** — GitHub Actions workflow (`.github/workflows/build-ipa.yml`) builds and signs the IPA on CI; no Mac needed.
+> - **Fork-aware update checks** — set the `FORK_*` constants in `CarTube/Util/Constants.swift` to your own repo after forking.
+>
+> iOS support is unchanged from upstream: CarPlay activation via TrollStore works on **iOS 14.0 – 15.4.1**. On iOS 15.4–16.6.1 use a Dopamine jailbreak + CarBridge instead; nothing here supports iOS 17+.
+
 <h1 align="center">Supports iOS 14.0 - 15.4.1</h1>
 <br/>
 <br/>
