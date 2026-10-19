@@ -60,7 +60,7 @@ struct ContentView: View {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
                         UIImpactFeedbackGenerator(style: .light).impactOccurred()
-                        openURL(URL(string: "https://github.com/Avangelista/CarTube")!)
+                        openURL(URL(string: FORK_REPO_URL)!)
                     }) {
                         Image("github")
                             .resizable()
