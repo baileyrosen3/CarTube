@@ -14,11 +14,13 @@ struct Settings: View {
     @State private var sponsorBlockOn = UserDefaults.standard.bool(forKey: "SponsorBlockOn")
     @State private var ageRestrictBypassOn = UserDefaults.standard.bool(forKey: "AgeRestrictBypassOn")
     @State private var adBlockerOn = UserDefaults.standard.bool(forKey: "AdBlockerOn")
+    @State private var maxQualityOn = UserDefaults.standard.bool(forKey: "MaxQualityOn")
     
     func saveSettings() {
         UserDefaults.standard.set(sponsorBlockOn, forKey: "SponsorBlockOn")
         UserDefaults.standard.set(ageRestrictBypassOn, forKey: "AgeRestrictBypassOn")
         UserDefaults.standard.set(adBlockerOn, forKey: "AdBlockerOn")
+        UserDefaults.standard.set(maxQualityOn, forKey: "MaxQualityOn")
         UserDefaults.standard.set(zoom, forKey: "Zoom")
         UserDefaults.standard.set(screenPersistenceOn, forKey: "ScreenPersistenceOn")
         UserDefaults.standard.set(lockScreenDimmingOn, forKey: "LockScreenDimmingOn")
@@ -49,6 +51,11 @@ struct Settings: View {
                 Section(footer: Text("Bypass age restriction in videos.")) {
                     Toggle(isOn: $ageRestrictBypassOn) {
                         Text("Age Restriction Bypass")
+                    }
+                }
+                Section(footer: Text("Force the YouTube player to its highest available quality. If the video stutters or the sound drifts out of sync, turn this off.")) {
+                    Toggle(isOn: $maxQualityOn) {
+                        Text("Force Highest Quality (Beta)")
                     }
                 }
                 Section(footer: Text("RECOMMENDED.\nCarTube requires the phone screen to be on at all times.\nThe Screen Persistence Helper will keep the phone screen on, even on the Lock Screen.")) {

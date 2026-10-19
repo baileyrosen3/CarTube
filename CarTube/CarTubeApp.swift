@@ -46,6 +46,7 @@ struct CarTubeApp: App {
             "SponsorBlockOn": false,
             "AgeRestrictBypassOn": false,
             "AdBlockerOn": false,
+            "MaxQualityOn": false,
             "Zoom": 80,
             "ScreenPersistenceOn": true,
             "LockScreenDimmingOn": true
@@ -53,14 +54,14 @@ struct CarTubeApp: App {
     }
     
     func checkNewVersions() {
-        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String, let url = URL(string: "https://api.github.com/repos/Avangelista/CarTube/releases/latest") {
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String, let url = URL(string: FORK_LATEST_RELEASE_API_URL) {
             let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
                 guard let data = data else { return }
                 
                 if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
                     if (json["tag_name"] as? String)?.compare(version, options: .numeric) == .orderedDescending {
                         UIApplication.shared.confirmAlert(title: "Update Available", body: "A new version of CarTube is available.\n\(json["body"] as? String ?? "Updating is recommended to avoid bugs.")\nWould you like to view the releases page?", onOK: {
-                            UIApplication.shared.open(URL(string: "https://github.com/Avangelista/CarTube/releases/latest")!)
+                            UIApplication.shared.open(URL(string: FORK_RELEASES_PAGE_URL)!)
                         }, noCancel: false, window: .main)
                     }
                 }

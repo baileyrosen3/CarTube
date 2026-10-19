@@ -32,6 +32,7 @@ class CarPlayViewController: UIViewController, WKNavigationDelegate, WKUIDelegat
         let sponsorBlockOn = UserDefaults.standard.bool(forKey: "SponsorBlockOn")
         let ageRestrictBypassOn = UserDefaults.standard.bool(forKey: "AgeRestrictBypassOn")
         let adBlockerOn = UserDefaults.standard.bool(forKey: "AdBlockerOn")
+        let maxQualityOn = UserDefaults.standard.bool(forKey: "MaxQualityOn")
         let webConfiguration = WKWebViewConfiguration()
         var enabledScripts: [String] = []
         if sponsorBlockOn {
@@ -43,9 +44,17 @@ class CarPlayViewController: UIViewController, WKNavigationDelegate, WKUIDelegat
         if adBlockerOn {
             enabledScripts.append("AdBlocker")
         }
+        if maxQualityOn {
+            enabledScripts.append("MaxQuality")
+        }
 
         // Add our custom CSS and JS
         enabledScripts.append("CustomLayout")
+
+        // Quality config must run before the bundled scripts, so it is
+        // injected at document start rather than document end.
+        let qualityConfigScript = "window.__cartube = Object.assign(window.__cartube || {}, { quality: { enabled: \(maxQualityOn) } });"
+        webConfiguration.userContentController.addUserScript(WKUserScript(source: qualityConfigScript, injectionTime: .atDocumentStart, forMainFrameOnly: false))
         
         enabledScripts.forEach { item in
             guard let scriptPath = Bundle.main.path(forResource: item, ofType: "js"),
