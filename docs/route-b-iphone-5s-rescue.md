@@ -1,45 +1,47 @@
-# Route B — iPhone 5s rescue for YouTube on the Cayenne PCM
+# Route B — iPhone 5s rescue for YouTube on the Cayenne PCM (v2, iOS 10.0.1 reality)
 
-Goal: live YouTube / YouTube Music (and maybe YouTube TV) on the 2019 Cayenne's PCM screen using the iPhone 5s (A7, iOS 12.5.x-class), the 2012 MacBook, and free jailbreak tooling.
+Device: iPhone 5s (A7, TAC 01388300), **iOS 10.0.1**, restored to factory, home button intermittently working (rescued via force-restart), Hebrew locale, Israeli SIM, no cell service.
 
-## Phase 1 — Home-button flex repair (prerequisite for everything)
+## Why the plan changed
 
-The dead button blocks: setup past Hello, DFU entry, AssistiveTouch — i.e., every software step below. Repair order:
+- checkra1n supports **iOS 12.0+** only — 10.0.1 is out of range.
+- The sideload-jailbreak alternative (Yalu-era) needs certificates that expire in 7 days on a free Apple ID — dead-on-arrival for a car-dedicated phone — and the 2016-era YouTube app likely can't stream modern YouTube. The BigBoss repo (home of NGXPlay) is offline since 2022.
+- checkm8 is a bootROM exploit: **updating iOS does not affect jailbreak availability.**
 
-1. Buy an **iPhone 5s home button flex cable** (aftermarket, a few euros). It restores click/return; **Touch ID is permanently lost** (button chip is paired to the logic board). That is expected and acceptable.
-2. Replace following iFixit's *"iPhone 5s Home Button Replacement"* guide (ifixit.com — search that exact title; needs P2 pentalobe screwdriver, suction cup, spudger). The button + flex sit under the display assembly; fiddly adhesive but a one-afternoon job. A phone repair shop can also do it cheaply.
-3. Reassemble → boot → should reach the Hebrew lock screen → press Home to unlock.
+## Chosen path: update → checkra1n → Havoc
 
-## Phase 2 — Activate the phone
+### Phase 1 — Home-button workarounds (do first, while it works)
 
-1. Keep the Israeli SIM installed (it may be needed for activation on a carrier-locked unit).
-2. Setup: language → keyboard → connect **WiFi** (hotspot from the Android phone works) → activation → (skip Touch ID configuration — it's dead) → done.
-3. Confirm in **Settings → General → About**: model must show iPhone 5s; note **Software Version**. If it reads iOS 12.x → proceed. If it reads 11.x or lower, stop and report back — the jailbreak tooling differs.
+- **Settings → Accessibility → Touch → AssistiveTouch → ON** (floating dot = on-screen Home/Lock/Restart; survives OTA updates). If the button dies again you stay navigable.
 
-## Phase 3 — checkra1n jailbreak (Mac, one-time + after every reboot)
+### Phase 2 — Update to the 12.5.x Apple still offers
 
-- macOS support: checkra1n 0.12.4 beta (latest), DMG at [checkra.in/releases](https://checkra.in/releases/) (SHA256 published there). The "A7 doesn't work" limitation applies **only to the Linux build** — macOS handles the 5s.
-- macOS version: 2012 MacBook runs at least High Sierra, optionally Catalina — both fine for checkra1n 0.12.4.
-- Flow: install DMG → open checkra1n → *Options*: leave defaults (or check "Safe Mode" only if the first run fails) → *Start* → the app drives the device into DFU: follow its on-screen button-holding instructions (now possible with the repaired button) → pwned → phone reboots with **Cydia** installed.
-- **Semi-tethered**: after every reboot the jailbreak is inactive — re-run checkra1n from the Mac. A car-dedicated phone rebooted rarely makes this tolerable; keep the phone on car USB power when parked.
+1. Free up storage if needed (Settings → General → iPhone Storage; OTA needs ~3 GB).
+2. **Settings → General → Software Update** → it should offer an **iOS 12.5.x** build (12.5.8 class; whatever is signed today) → install over WiFi.
+   - If it offers nothing / fails: report back — fallback is the messy 10.x sideload road, not recommended.
+3. After the update: confirm AssistiveTouch still on; note the new version (12.5.x).
 
-## Phase 4 — NGXPlay11 + YouTube (free via Cydia/BigBoss)
+### Phase 3 — checkra1n on the 2012 MacBook
 
-1. Open **Cydia** → Sources → confirm **BigBoss** is enabled → search `NGXPlay11` → install (free).
-2. App Store → YouTube → App Store offers the **last compatible version** for iOS 12 — install it (old build, works with a 360p-ish default).
-3. Same store mechanism for **YouTube Music** (last compatible iOS 12 build) and, optionally, **YouTube TV** (live TV may fail DRM/geo on the old build — test, fall back to Bluetooth audio).
-4. **Settings → NGXPlay**: enable it, adjust FPS (start ~15–20 on the A7; raise if smooth), tap **+** and add YouTube / YouTube Music.
-5. Internet in the car: the phone joins the **Android phone's hotspot** (WiFi) — no cell service needed.
+- macOS: checkra1n **0.12.4 beta** DMG from [checkra.in/releases](https://checkra.in/releases/) (A7 limitation is Linux-only; macOS handles the 5s).
+- Plug the 5s into the Mac (Lightning → USB-A) → *Start* → follow the on-screen DFU button-holds (physical button; AssistiveTouch can't do DFU).
+- In checkra1n **Options**, prefer **Sileo** over Cydia (both offered; Sileo + its repo infra are still alive) → exploit → reboot semi-tethered.
+- Semi-tethered: after every reboot, re-run checkra1n from the Mac. Keep the phone on car USB power while parked.
 
-## Phase 5 — In-car validation (Cayenne PCM 5.X)
+### Phase 4 — CarBridge Legacy (Havoc — alive, unlike BigBoss)
 
-1. Plug the 5s into the center-console CarPlay USB port → CarPlay launches on the PCM.
-2. Open the NGXPlay-provided app entry → YouTube appears on the PCM screen.
-3. Play a video — confirm video renders, audio routes through the car.
-4. Tune NGXPlay FPS + YouTube quality settings until stable; expect some stutter at high quality (A7/1 GB ceiling).
-5. **Parked use only** for video — driver-visible moving images while driving are restricted in most EU member states (e.g. DE StVO §23a).
+1. Open Sileo → Sources → add **https://havoc.app** → search **CarBridge Legacy** (the iOS 10–12 build, [havoc.app/package/carbridgelegacy](https://havoc.app/package/carbridgelegacy)) → purchase (a couple of dollars) and install.
+2. App Store → YouTube → install the **last compatible version** for iOS 12 (2021-22-era build; streams fine). Same for **YouTube Music**. YouTube TV: test, expect possible DRM/geo failure on the old build → Bluetooth audio fallback.
+3. **Settings → CarBridge**: enable, add YouTube / YouTube Music to the CarPlay list, mirror-mode on.
+
+### Phase 5 — In-car validation (Cayenne PCM 5.X)
+
+1. 5s → center-console CarPlay USB → CarPlay launches on the PCM.
+2. Open CarBridge → YouTube on the PCM screen → play a video (parked).
+3. Tune FPS/quality; expect stutter limits from A7 + 1 GB RAM.
+4. **Parked use only** for video — driver-visible moving images while driving are restricted in most EU member states (e.g. DE StVO §23a).
 
 ## Fallbacks
 
-- NGXPlay11 misbehaves → try **CarBridge Legacy** (Havoc repo, iOS 10–12, paid) as the alternative tweak.
-- Anything unresolvable → the fork ([v1.4-fork.1 IPA](https://github.com/baileyrosen3/CarTube/releases/tag/v1.4-fork.1)) + USB-archive + Bluetooth tiers remain standing.
+- CarBridge Legacy misbehaves → NGXPlay11 (.deb) can be hunted from community BigBoss mirrors; less reliable supply chain.
+- Whole phone route collapses → the CarTube fork ([v1.4-fork.1](https://github.com/baileyrosen3/CarTube/releases/tag/v1.4-fork.1)) waits for a 6s–X-class device; USB-archive + Bluetooth tiers are already standing.
