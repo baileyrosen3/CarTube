@@ -96,6 +96,11 @@ class CarPlaySingleton {
     func goHome() {
         controller?.goHome()
     }
+
+    /// Go to YouTube Music on the web view
+    func goMusic() {
+        controller?.goMusic()
+    }
     
     func goBack() {
         controller?.goBack()

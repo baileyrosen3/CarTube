@@ -15,8 +15,11 @@ struct Debug: View {
                     Button("Go Back in Browser") {
                         CarPlaySingleton.shared.goBack()
                     }
-                    Button("Go Home in Browser") {
+                    Button("Go Home: Browse") {
                         CarPlaySingleton.shared.goHome()
+                    }
+                    Button("Go Home: YouTube Music") {
+                        CarPlaySingleton.shared.goMusic()
                     }
                     Button("Toggle CarPlay Keyboard") {
                         CarPlaySingleton.shared.toggleKeyboard()

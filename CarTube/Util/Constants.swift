@@ -10,6 +10,7 @@ import Foundation
 let YT_HOME = "https://m.youtube.com/"
 let YT_EMBED = "https://m.youtube.com/watch?v="
 let YT_SEARCH = "https://m.youtube.com/results?search_query="
+let YT_MUSIC_HOME = "https://music.youtube.com/"
 
 // Fork configuration. Point these at your own GitHub fork once you push it:
 // they drive the in-app update check and the repo button.

@@ -268,6 +268,11 @@ class CarPlayViewController: UIViewController, WKNavigationDelegate, WKUIDelegat
     func goHome() {
         loadUrl(YT_HOME)
     }
+
+    // Go to YouTube Music
+    func goMusic() {
+        loadUrl(YT_MUSIC_HOME)
+    }
     
     // Go back
     func goBack() {
