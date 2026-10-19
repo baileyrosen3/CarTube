@@ -5,3 +5,4 @@
 #import "AutoHook.h"
 #import "WebView+Additions.h"
 #import "AVExternalDevice.h"
+#import "Hooks/Headers/UIScreen+_isCarScreen.h"

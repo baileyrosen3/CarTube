@@ -22,8 +22,24 @@ struct Debug: View {
                         CarPlaySingleton.shared.toggleKeyboard()
                     }
                 }
+                Section(header: Text("Car screen")) {
+                    ForEach(Array(UIScreen.screens.enumerated()), id: \.offset) { _, screen in
+                        Text(carScreenLabel(screen))
+                    }
+                }
             }
         }.navigationBarTitle("Debug", displayMode: .inline)
+    }
+
+    /// The car display shows up as a UIScreen; its bounds are what CarTube
+    /// actually renders into. Useful for tuning quality and zoom per car.
+    private func carScreenLabel(_ screen: UIScreen) -> String {
+        var isCar = false
+        if screen.responds(to: NSSelectorFromString("_isCarScreen")) {
+            isCar = screen._isCarScreen
+        }
+        let suffix = isCar ? " — car screen" : ""
+        return "\(Int(screen.bounds.width)) × \(Int(screen.bounds.height)) pts @\(Int(screen.scale))x\(suffix)"
     }
 }
 
