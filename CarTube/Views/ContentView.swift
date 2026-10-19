@@ -62,7 +62,7 @@ struct ContentView: View {
                         UIImpactFeedbackGenerator(style: .light).impactOccurred()
                         openURL(URL(string: FORK_REPO_URL)!)
                     }) {
-                        Image("github")
+                        Image(systemName: "chevron.left.forwardslash.chevron.right")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 20, height: 20)
